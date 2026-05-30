@@ -141,9 +141,11 @@ export default function LoginPage() {
       />
       <div className="border-border/20 bg-background/5 w-full max-w-md space-y-6 rounded-3xl border p-8 backdrop-blur-sm">
         <div className="text-center">
-          <h1 className="text-foreground font-serif text-3xl">DeerFlow</h1>
+          <h1 className="text-foreground font-serif text-3xl">
+            AI Tool Research｜AI工具深度测评系统
+          </h1>
           <p className="text-muted-foreground mt-2">
-            {isLogin ? "Sign in to your account" : "Create a new account"}
+            {isLogin ? "登录你的测评工作台" : "创建账户"}
           </p>
         </div>
 
@@ -180,10 +182,10 @@ export default function LoginPage() {
 
           <Button type="submit" className="w-full" disabled={loading}>
             {loading
-              ? "Please wait..."
+              ? "请稍候..."
               : isLogin
-                ? "Sign In"
-                : "Create Account"}
+                ? "登录"
+                : "创建账户"}
           </Button>
         </form>
 
@@ -197,14 +199,14 @@ export default function LoginPage() {
             className="text-blue-500 hover:underline"
           >
             {isLogin
-              ? "Don't have an account? Sign up"
-              : "Already have an account? Sign in"}
+              ? "还没有账户？创建账户"
+              : "已有账户？登录"}
           </button>
         </div>
 
         <div className="text-muted-foreground text-center text-xs">
           <Link href="/" className="hover:underline">
-            ← Back to home
+            ← 返回首页
           </Link>
         </div>
       </div>

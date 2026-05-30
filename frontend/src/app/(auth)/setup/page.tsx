@@ -166,10 +166,12 @@ export default function SetupPage() {
         />
         <div className="border-border/20 bg-background/5 w-full max-w-md space-y-6 rounded-3xl border p-8 backdrop-blur-sm">
           <div className="text-center">
-            <h1 className="font-serif text-3xl">DeerFlow</h1>
-            <p className="text-muted-foreground mt-2">Create admin account</p>
+            <h1 className="font-serif text-3xl">
+              初始化 AI 工具测评系统
+            </h1>
+            <p className="text-muted-foreground mt-2">创建管理员账户</p>
             <p className="text-muted-foreground mt-1 text-xs">
-              Set up the administrator account to get started.
+              首次使用前，请创建管理员账户。
             </p>
           </div>
           <form onSubmit={handleInitAdmin} className="space-y-2">
@@ -216,7 +218,7 @@ export default function SetupPage() {
             </div>
             {error && <p className="ms-1 text-sm text-red-500">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Creating account…" : "Create Admin Account"}
+              {loading ? "正在创建账户…" : "创建管理员账户"}
             </Button>
           </form>
         </div>
@@ -237,12 +239,14 @@ export default function SetupPage() {
       />
       <div className="border-border/20 bg-background/5 w-full max-w-md space-y-6 rounded-3xl border p-8 backdrop-blur-sm">
         <div className="text-center">
-          <h1 className="font-serif text-3xl">DeerFlow</h1>
+          <h1 className="font-serif text-3xl">
+            初始化 AI 工具测评系统
+          </h1>
           <p className="text-muted-foreground mt-2">
-            Complete admin account setup
+            完成管理员账户设置
           </p>
           <p className="text-muted-foreground mt-1 text-xs">
-            Set your real email and a new password.
+            请设置你的邮箱和新密码。
           </p>
         </div>
         <form onSubmit={handleChangePassword} className="space-y-4">
@@ -278,7 +282,7 @@ export default function SetupPage() {
           />
           {error && <p className="text-sm text-red-500">{error}</p>}
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Setting up…" : "Complete Setup"}
+            {loading ? "正在设置…" : "完成设置"}
           </Button>
         </form>
       </div>
