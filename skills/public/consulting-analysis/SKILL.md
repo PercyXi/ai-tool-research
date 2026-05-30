@@ -1,6 +1,6 @@
 ---
 name: consulting-analysis
-description: Use this skill when the user requests to generate, create, or write professional research reports including but not limited to market analysis, consumer insights, brand analysis, financial analysis, industry research, competitive intelligence, investment due diligence, or any consulting-grade analytical report. This skill operates in two phases — (1) generating a structured analysis framework with chapter skeleton, data query requirements, and analysis logic, and (2) after data collection by other skills, producing the final consulting-grade report with structured narratives, embedded charts, and strategic insights.
+description: Use this skill when the user requests to generate, create, or write professional research reports including but not limited to market analysis, consumer insights, brand analysis, financial analysis, industry research, competitive intelligence, investment due diligence, AI tool evaluation, AI operations workflows, tool selection, automation workflow assessment, Agent platforms, knowledge bases, Dify, Coze, FastGPT, DeerFlow, Codex, Claude Code, n8n, Make, or any consulting-grade analytical report. This skill operates in two phases — (1) generating a structured analysis framework with chapter skeleton, data query requirements, and analysis logic, and (2) after data collection by other skills, producing the final consulting-grade report with structured narratives, embedded charts, and strategic insights.
 ---
 
 # Professional Research Report Skill
@@ -40,6 +40,60 @@ The output adheres to McKinsey/BCG consulting voice standards. The report langua
 - User provides data summaries, analysis frameworks, or chart files to be synthesized into a report
 - User needs a professional consulting-style research report
 - The task involves transforming research findings into structured strategic narratives
+
+## AI Tool Evaluation Report
+
+When the user request is about AI tool evaluation, AI operations scenarios, tool selection, automation workflows, Agent platforms, knowledge bases, Dify, Coze, FastGPT, DeerFlow, Codex, Claude Code, Dify workflows, AI content automation, n8n, Make, or similar AI tool operations topics, prioritize the following fixed Markdown report structure instead of the generic consulting report structure.
+
+Use this structure when the user asks to:
+
+- Evaluate whether an AI tool fits a team, role, or business scenario
+- Compare multiple AI tools
+- Design an AI tool introduction, pilot, adoption, or implementation process
+- Analyze AI operations, AI tool operations, workflow building, or Agent product operations plans
+- Assess tools such as Dify, Coze, FastGPT, DeerFlow, Codex, Claude Code, n8n, Make, or similar platforms
+
+### Required Output Structure
+
+```markdown
+# AI 工具测评报告：{工具或主题}
+
+## 1. 执行摘要
+用 3-5 句话直接给结论，说明是否适合、适合什么团队、主要风险。
+
+## 2. 工具定位
+说明该工具本质是什么，解决什么问题，不要泛泛介绍。
+
+## 3. 适用场景
+按业务场景拆分，说明哪些场景适合，哪些场景不适合。
+
+## 4. 核心能力拆解
+从功能、工作流、知识库、自动化、协作、扩展性、数据/权限等角度拆解。
+
+## 5. 上手成本
+从学习成本、部署成本、维护成本、团队协作成本、模型/API 成本分析。
+
+## 6. 替代方案对比
+至少对比 2-3 个可替代工具或方案，说明差异和选择建议。
+
+## 7. 落地风险
+列出真实风险，包括成本失控、权限/数据安全、维护复杂、产出不稳定、团队不采用等。
+
+## 8. 试点方案
+给出一个 2-4 周的小规模试点路径，包括目标、参与角色、流程、验收指标。
+
+## 9. 最终建议
+给出明确建议：推荐 / 谨慎推荐 / 不推荐，并说明下一步行动。
+```
+
+### AI Tool Evaluation Style Rules
+
+- Put the conclusion first; avoid generic introductions.
+- Write like a consulting report or product evaluation report, not a casual chat answer.
+- Make the report suitable for AI operations, AI tool operations, or AI product operations interview presentation scenarios.
+- If information is insufficient, clearly state assumptions and unknowns instead of inventing specific data.
+- If using external sources, keep the project's supported citation format: inline citations as `[citation:Title](URL)` and a final `Sources` section with standard Markdown links. Do not output bare text such as `citation:Dify`.
+- Preserve the general consulting-analysis capability for non-AI-tool topics; this fixed structure only takes priority for AI tool evaluation requests.
 
 ---
 
