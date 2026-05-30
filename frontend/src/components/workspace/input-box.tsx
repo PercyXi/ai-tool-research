@@ -86,6 +86,8 @@ import { Tooltip } from "./tooltip";
 
 type InputMode = "flash" | "thinking" | "pro" | "ultra";
 
+const TOOL_EVALUATION_PROMPT_EVENT = "deerflow:tool-evaluation-prompt";
+
 function getResolvedMode(
   mode: InputMode | undefined,
   supportsThinking: boolean,
@@ -300,6 +302,35 @@ export function InputBox({
     const form = promptRootRef.current?.querySelector("form");
     form?.requestSubmit();
   }, []);
+
+  useEffect(() => {
+    const handleToolEvaluationPrompt = (event: Event) => {
+      const prompt = (event as CustomEvent<{ prompt?: string }>).detail
+        ?.prompt;
+      if (!prompt) {
+        return;
+      }
+      textInput.setInput(prompt);
+      setFollowupsHidden(true);
+      setTimeout(() => {
+        const textarea = promptRootRef.current?.querySelector<
+          HTMLTextAreaElement
+        >("textarea[name='message']");
+        textarea?.focus();
+      }, 0);
+    };
+
+    window.addEventListener(
+      TOOL_EVALUATION_PROMPT_EVENT,
+      handleToolEvaluationPrompt,
+    );
+    return () => {
+      window.removeEventListener(
+        TOOL_EVALUATION_PROMPT_EVENT,
+        handleToolEvaluationPrompt,
+      );
+    };
+  }, [textInput]);
 
   const handleFollowupClick = useCallback(
     (suggestion: string) => {
