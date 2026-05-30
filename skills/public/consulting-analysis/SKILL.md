@@ -1,6 +1,6 @@
 ---
 name: consulting-analysis
-description: Use this skill when the user requests to generate, create, or write professional research reports including but not limited to market analysis, consumer insights, brand analysis, financial analysis, industry research, competitive intelligence, investment due diligence, AI tool evaluation, AI operations workflows, tool selection, automation workflow assessment, Agent platforms, knowledge bases, Dify, Coze, FastGPT, DeerFlow, Codex, Claude Code, n8n, Make, or any consulting-grade analytical report. This skill operates in two phases — (1) generating a structured analysis framework with chapter skeleton, data query requirements, and analysis logic, and (2) after data collection by other skills, producing the final consulting-grade report with structured narratives, embedded charts, and strategic insights.
+description: Use this skill when the user requests to generate, create, or write professional research reports including but not limited to market analysis, consumer insights, brand analysis, financial analysis, industry research, competitive intelligence, investment due diligence, quick AI tool evaluation, AI operations workflows, tool selection, automation workflow assessment, Agent platforms, knowledge bases, Dify, Coze, FastGPT, DeerFlow, Codex, Claude Code, n8n, Make, or any consulting-grade analytical report. This skill operates in two phases — (1) generating a structured analysis framework with chapter skeleton, data query requirements, and analysis logic, and (2) after data collection by other skills, producing the final consulting-grade report with structured narratives, embedded charts, and strategic insights.
 ---
 
 # Professional Research Report Skill
@@ -41,11 +41,15 @@ The output adheres to McKinsey/BCG consulting voice standards. The report langua
 - User needs a professional consulting-style research report
 - The task involves transforming research findings into structured strategic narratives
 
-## AI Tool Evaluation Report
+## AI Tool Evaluation Fast Report Mode
 
-When the user request is about AI tool evaluation, AI operations scenarios, tool selection, automation workflows, Agent platforms, knowledge bases, Dify, Coze, FastGPT, DeerFlow, Codex, Claude Code, Dify workflows, AI content automation, n8n, Make, or similar AI tool operations topics, prioritize the following fixed Markdown report structure instead of the generic consulting report structure.
+When the user request is about AI tool evaluation, AI operations scenarios, tool selection, automation workflows, Agent platforms, knowledge bases, Dify, Coze, FastGPT, DeerFlow, Codex, Claude Code, Dify workflows, AI content automation, n8n, Make, or similar AI tool operations topics, use **AI Tool Evaluation Fast Report Mode** by default.
 
-Use this structure when the user asks to:
+This mode takes priority over the generic consulting report workflow for AI tool evaluation requests. Preserve the general consulting-analysis capability for non-AI-tool topics.
+
+### Fast Mode Trigger Conditions
+
+Use fast mode when the user asks to:
 
 - Evaluate whether an AI tool fits a team, role, or business scenario
 - Compare multiple AI tools
@@ -53,7 +57,18 @@ Use this structure when the user asks to:
 - Analyze AI operations, AI tool operations, workflow building, or Agent product operations plans
 - Assess tools such as Dify, Coze, FastGPT, DeerFlow, Codex, Claude Code, n8n, Make, or similar platforms
 
+### Research Depth Rules
+
+- Default to a quick evaluation report, not a long-chain deep research process.
+- Do not run 20+ step research plans unless the user explicitly asks for "deep research", "comprehensive research", "full investigation", "联网查证", "深度调研", or "全面调研".
+- By default, perform only 1-3 necessary searches when current or tool-specific facts need checking.
+- For common AI tools, you may use existing knowledge plus clearly stated assumptions to produce the report directly.
+- If information is insufficient, write "以下判断基于公开常识和当前假设" and list the assumptions. Do not fabricate specific metrics, prices, customer cases, benchmarks, or adoption data.
+- If the user explicitly requests deep research or source verification, you may expand research depth, but still preserve the fixed 1-9 output structure unless the user requests another format.
+
 ### Required Output Structure
+
+Always use the following exact Markdown heading structure for AI tool evaluation requests. Do not replace these headings with free-form titles such as "Dify 是什么", "核心功能分析", "产品介绍", or "综合分析".
 
 ```markdown
 # AI 工具测评报告：{工具或主题}
@@ -92,8 +107,10 @@ Use this structure when the user asks to:
 - Write like a consulting report or product evaluation report, not a casual chat answer.
 - Make the report suitable for AI operations, AI tool operations, or AI product operations interview presentation scenarios.
 - If information is insufficient, clearly state assumptions and unknowns instead of inventing specific data.
-- If using external sources, keep the project's supported citation format: inline citations as `[citation:Title](URL)` and a final `Sources` section with standard Markdown links. Do not output bare text such as `citation:Dify`.
-- Preserve the general consulting-analysis capability for non-AI-tool topics; this fixed structure only takes priority for AI tool evaluation requests.
+- Do not output bare citation markers such as `citation:Dify`, `citation:xxx`, or plain `citation:` text.
+- If using external sources, keep the project's supported format: inline citations as valid Markdown links like `[citation:Title](URL)` and a final `Sources` section with standard Markdown links.
+- If you cannot produce a valid Markdown citation with a real URL, do not force a citation marker.
+- Preserve the general consulting-analysis capability for non-AI-tool topics; fast mode only takes priority for AI tool evaluation requests.
 
 ---
 
