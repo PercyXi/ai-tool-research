@@ -62,41 +62,32 @@ export function Welcome({
       ) : (
         <>
           <div className="text-muted-foreground text-sm">
-            {t.welcome.description.includes("\n") ? (
-              <pre className="font-sans whitespace-pre">
-                {t.welcome.description}
-              </pre>
-            ) : (
-              <p>{t.welcome.description}</p>
-            )}
+            <p>输入工具名称、使用场景和关注重点，生成结构化测评报告。</p>
           </div>
           <div className="bg-background/70 border-border/70 mt-3 w-full max-w-xl rounded-xl border p-4 text-left shadow-xs backdrop-blur-sm">
-            <div className="text-foreground text-sm font-semibold">
-              开始一次 AI 工具测评
+            <div className="border-border/60 text-foreground border-b pb-3 text-sm font-semibold">
+              测评模板
             </div>
-            <p className="text-muted-foreground mt-2 text-xs leading-relaxed">
-              按照“工具名称 + 使用场景 + 关注重点”描述你的问题，系统会围绕工具价值、适用场景、成本风险和试点路径生成研究结论。
-            </p>
-            <div className="mt-3 grid gap-2 text-xs">
-              <div>
-                <span className="text-muted-foreground">工具名称：</span>
+            <div className="mt-3 grid gap-2 text-sm">
+              <div className="bg-muted/40 grid grid-cols-[3.5rem_1fr] gap-2 rounded-md px-3 py-2">
+                <span className="text-muted-foreground">工具</span>
                 <span className="text-foreground font-medium">Dify</span>
               </div>
-              <div>
-                <span className="text-muted-foreground">使用场景：</span>
+              <div className="bg-muted/40 grid grid-cols-[3.5rem_1fr] gap-2 rounded-md px-3 py-2">
+                <span className="text-muted-foreground">场景</span>
                 <span className="text-foreground">
                   内容运营团队搭建知识库和自动化工作流
                 </span>
               </div>
-              <div>
-                <span className="text-muted-foreground">关注重点：</span>
+              <div className="bg-muted/40 grid grid-cols-[3.5rem_1fr] gap-2 rounded-md px-3 py-2">
+                <span className="text-muted-foreground">关注</span>
                 <span className="text-foreground">
                   上手成本、替代方案、落地风险、试点路径
                 </span>
               </div>
             </div>
             <p className="text-muted-foreground mt-3 text-xs leading-relaxed">
-              你可以直接复制这个结构，在下方输入框中替换成自己的工具和场景。
+              复制这个结构，替换成你的工具和业务场景即可。
             </p>
           </div>
         </>
