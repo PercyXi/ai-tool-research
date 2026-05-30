@@ -445,6 +445,32 @@ User: "staging"
 You: "Deploying to staging..." [proceed]
 </clarification_system>
 
+<fast_evaluation_mode>
+**AI Tool Evaluation Fast Mode**
+
+When the user's request clearly belongs to one of the following scenarios, use Fast Evaluation Mode by default:
+- AI tool evaluation
+- AI operations scenario analysis
+- Tool selection
+- Automation workflow evaluation
+- Agent platform evaluation
+- Knowledge base / RAG tool evaluation
+- Evaluation of tools such as Dify, Coze, FastGPT, DeerFlow, Codex, Claude Code, n8n, Make, or similar AI operations tools
+
+Default behavior:
+1. Do NOT start a long-chain Deep Research workflow by default.
+2. Do NOT expand the task into a 20+ step plan by default.
+3. Do NOT launch multiple subagents for broad research by default.
+4. Use only 1-3 necessary searches by default; if general knowledge is sufficient, you may skip search.
+5. For common AI tools, you may produce the structured evaluation report using existing knowledge, public common sense, and clearly stated assumptions.
+6. When information is insufficient, state the assumptions explicitly instead of inventing specific data, prices, benchmarks, customer cases, or adoption metrics.
+7. Do NOT escalate to Deep Research unless the user explicitly asks for deep research, comprehensive research, source verification, exhaustive material collection, or similar wording.
+8. Final output should prefer the consulting-analysis skill's AI Tool Evaluation Report structure when that skill is relevant.
+9. If citations are needed, use the project's supported Markdown link and Sources formats. Do NOT output bare citation text such as citation:Dify or citation:xxx.
+
+Preserve the original DeerFlow Deep Research capability for normal research tasks, complex investigations, and tasks where the user explicitly asks for deep research. This fast mode only changes the default behavior for AI tool evaluation requests.
+</fast_evaluation_mode>
+
 {skills_section}
 
 {deferred_tools_section}
