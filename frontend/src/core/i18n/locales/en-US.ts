@@ -60,9 +60,9 @@ export const enUS: Translations = {
 
   // Welcome
   welcome: {
-    greeting: "Hello, again!",
+    greeting: "Start AI tool evaluation",
     description:
-      "Welcome to 🦌 DeerFlow, an open source super agent. With built-in and custom skills, DeerFlow helps you search on the web, analyze data, and generate artifacts like slides, web pages and do almost anything.",
+      "AI Tool Research is a research workspace for AI operations teams. Evaluate tool value, use cases, onboarding cost, alternatives, and rollout risks, then generate structured findings and pilot recommendations.",
 
     createYourOwnSkill: "Create Your Own Skill",
     createYourOwnSkillDescription:
@@ -79,7 +79,7 @@ export const enUS: Translations = {
 
   // Input Box
   inputBox: {
-    placeholder: "How can I assist you today?",
+    placeholder: "Enter an AI tool, use case, or comparison question to evaluate",
     createSkillPrompt:
       "We're going to build a new skill step by step with `skill-creator`. To start, what do you want this skill to do?",
     addAttachments: "Add attachments",
@@ -107,8 +107,9 @@ export const enUS: Translations = {
     reasoningEffortHighDescription:
       "Full-dimensional Logic Deduction + Multi-path Verification + Backward Check",
     searchModels: "Search models...",
-    surpriseMe: "Surprise",
-    surpriseMePrompt: "Surprise me",
+    surpriseMe: "Random evaluation",
+    surpriseMePrompt:
+      "Pick a popular AI tool and create an evaluation brief for an AI operations team",
     followupLoading: "Generating follow-up questions...",
     followupConfirmTitle: "Send suggestion?",
     followupConfirmDescription:
@@ -117,31 +118,35 @@ export const enUS: Translations = {
     followupConfirmReplace: "Replace & send",
     suggestions: [
       {
-        suggestion: "Write",
-        prompt: "Write a blog post about the latest trends on [topic]",
+        suggestion: "Evaluate Dify",
+        prompt:
+          "Evaluate whether Dify is suitable for a content operations team to build knowledge bases and workflows",
         icon: PenLineIcon,
       },
       {
-        suggestion: "Research",
+        suggestion: "Compare tools",
         prompt:
-          "Conduct a deep dive research on [topic], and summarize the findings.",
+          "Compare Coze, Dify, and FastGPT for AI operations scenarios",
         icon: MicroscopeIcon,
       },
       {
-        suggestion: "Collect",
-        prompt: "Collect data from [source] and create a report.",
+        suggestion: "Rollout risks",
+        prompt:
+          "Analyze the costs, risks, and pilot path to review before introducing an AI tool into an enterprise",
         icon: ShapesIcon,
       },
       {
-        suggestion: "Learn",
-        prompt: "Learn about [topic] and create a tutorial.",
+        suggestion: "Selection flow",
+        prompt:
+          "Design a tool selection and rollout evaluation process for AI operations roles",
         icon: GraduationCapIcon,
       },
     ],
     suggestionsCreate: [
       {
-        suggestion: "Webpage",
-        prompt: "Create a webpage about [topic]",
+        suggestion: "Coding tools",
+        prompt:
+          "Evaluate the value of AI coding tools like Claude Code or Codex for content automation",
         icon: CompassIcon,
       },
       {
@@ -168,7 +173,7 @@ export const enUS: Translations = {
 
   // Sidebar
   sidebar: {
-    newChat: "New chat",
+    newChat: "New evaluation",
     chats: "Chats",
     recentChats: "Recent chats",
     demoChats: "Demo chats",
@@ -255,9 +260,9 @@ export const enUS: Translations = {
 
   // Page titles (document title)
   pages: {
-    appName: "DeerFlow",
+    appName: "AI Tool Research｜AI工具深度测评系统",
     chats: "Chats",
-    newChat: "New chat",
+    newChat: "New evaluation",
     untitled: "Untitled",
   },
 

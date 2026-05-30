@@ -60,9 +60,9 @@ export const zhCN: Translations = {
 
   // Welcome
   welcome: {
-    greeting: "你好，欢迎回来！",
+    greeting: "开始 AI 工具深度测评",
     description:
-      "欢迎使用 🦌 DeerFlow，一个完全开源的超级智能体。通过内置和自定义的 Skills，\nDeerFlow 可以帮你搜索网络、分析数据，还能为你生成幻灯片、\n图片、视频、播客及网页等，几乎可以做任何事情。",
+      "面向 AI 运营团队的工具测评与研究工作台。围绕工具价值、适用场景、上手成本、替代方案与落地风险，\n生成结构化研究结论和试点建议。",
 
     createYourOwnSkill: "创建你自己的 Agent SKill",
     createYourOwnSkillDescription:
@@ -79,7 +79,7 @@ export const zhCN: Translations = {
 
   // Input Box
   inputBox: {
-    placeholder: "今天我能为你做些什么？",
+    placeholder: "输入你想测评的 AI 工具、场景或对比问题",
     createSkillPrompt:
       "我们一起用 skill-creator 技能来创建一个技能吧。先问问我希望这个技能能做什么。",
     addAttachments: "添加附件",
@@ -103,8 +103,8 @@ export const zhCN: Translations = {
     reasoningEffortHigh: "高",
     reasoningEffortHighDescription: "全维度逻辑推演 + 多路径验证 + 反推校验",
     searchModels: "搜索模型...",
-    surpriseMe: "小惊喜",
-    surpriseMePrompt: "给我一个小惊喜吧",
+    surpriseMe: "随机测评",
+    surpriseMePrompt: "选择一个热门 AI 工具，生成一份面向 AI 运营团队的测评简报",
     followupLoading: "正在生成可能的后续问题...",
     followupConfirmTitle: "发送建议问题？",
     followupConfirmDescription: "当前输入框已有内容，选择发送方式。",
@@ -112,30 +112,32 @@ export const zhCN: Translations = {
     followupConfirmReplace: "替换并发送",
     suggestions: [
       {
-        suggestion: "写作",
-        prompt: "撰写一篇关于[主题]的博客文章",
+        suggestion: "评估 Dify",
+        prompt: "评估 Dify 是否适合内容运营团队搭建知识库和工作流",
         icon: PenLineIcon,
       },
       {
-        suggestion: "研究",
-        prompt: "深入浅出的研究一下[主题]，并总结发现。",
+        suggestion: "工具对比",
+        prompt: "对比 Coze、Dify、FastGPT 在 AI 运营场景中的适用差异",
         icon: MicroscopeIcon,
       },
       {
-        suggestion: "收集",
-        prompt: "从[来源]收集数据并创建报告。",
+        suggestion: "落地风险",
+        prompt:
+          "分析一个 AI 工具引入企业前需要关注的成本、风险和试点路径",
         icon: ShapesIcon,
       },
       {
-        suggestion: "学习",
-        prompt: "学习关于[主题]并创建教程。",
+        suggestion: "选型流程",
+        prompt: "为 AI 运营岗位设计一套工具选型与落地评估流程",
         icon: GraduationCapIcon,
       },
     ],
     suggestionsCreate: [
       {
-        suggestion: "网页",
-        prompt: "生成一个关于[主题]的网页",
+        suggestion: "编程工具",
+        prompt:
+          "评估 Claude Code / Codex 这类 AI 编程工具在内容自动化中的使用价值",
         icon: CompassIcon,
       },
       {
@@ -162,7 +164,7 @@ export const zhCN: Translations = {
 
   // Sidebar
   sidebar: {
-    newChat: "新对话",
+    newChat: "新建测评",
     chats: "对话",
     recentChats: "最近的对话",
     demoChats: "演示对话",
@@ -243,9 +245,9 @@ export const zhCN: Translations = {
 
   // Page titles (document title)
   pages: {
-    appName: "DeerFlow",
+    appName: "AI Tool Research｜AI工具深度测评系统",
     chats: "对话",
-    newChat: "新对话",
+    newChat: "新建测评",
     untitled: "未命名",
   },
 

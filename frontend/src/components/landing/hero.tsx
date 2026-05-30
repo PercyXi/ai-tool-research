@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import Galaxy from "@/components/ui/galaxy";
-import { WordRotate } from "@/components/ui/word-rotate";
 import { env } from "@/env";
 import { cn } from "@/lib/utils";
 
@@ -37,25 +36,11 @@ export function Hero({ className }: { className?: string }) {
         flickerChance={0.25}
       />
       <div className="container-md relative z-10 mx-auto flex h-screen flex-col items-center justify-center">
-        <h1 className="flex items-center gap-2 text-4xl font-bold md:text-6xl">
-          <WordRotate
-            words={[
-              "Deep Research",
-              "Collect Data",
-              "Analyze Data",
-              "Generate Webpages",
-              "Vibe Coding",
-              "Generate Slides",
-              "Generate Images",
-              "Generate Podcasts",
-              "Generate Videos",
-              "Generate Songs",
-              "Organize Emails",
-              "Do Anything",
-              "Learn Anything",
-            ]}
-          />{" "}
-          <div>with DeerFlow</div>
+        <h1 className="flex flex-col items-center gap-3 text-center text-4xl font-bold md:text-6xl">
+          <span>AI Tool Research｜AI工具深度测评系统</span>
+          <span className="text-3xl md:text-5xl">
+            面向 AI 运营团队的工具测评与研究工作台
+          </span>
         </h1>
         {env.NEXT_PUBLIC_STATIC_WEBSITE_ONLY && (
           <a
@@ -70,17 +55,15 @@ export function Hero({ className }: { className?: string }) {
           </a>
         )}
         <p className="text-muted-foreground mt-8 scale-105 text-center text-2xl text-shadow-sm">
-          An open-source SuperAgent harness that researches, codes, and creates.
-          With
+          围绕 AI 工具价值、适用场景、上手成本、替代方案与落地风险，
           <br />
-          the help of sandboxes, memories, tools, skills and subagents, it
-          handles
+          生成结构化研究结论和试点建议，
           <br />
-          different levels of tasks that could take minutes to hours.
+          帮助 AI 运营团队更快完成工具选型与落地评估。
         </p>
         <Link href="/workspace">
           <Button className="size-lg mt-8 scale-108" size="lg">
-            <span className="text-md">Get Started with 2.0</span>
+            <span className="text-md">进入测评工作台</span>
             <ChevronRightIcon className="size-4" />
           </Button>
         </Link>
