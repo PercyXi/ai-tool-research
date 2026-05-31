@@ -12,11 +12,11 @@ export function SkillsSection({ className }: { className?: string }) {
       title="Agent Skills"
       subtitle={
         <div>
-          Agent Skills are loaded progressively — only what&apos;s needed, when
-          it&apos;s needed.
+          Agent Skills help the system focus on the right evaluation workflow —
+          only what&apos;s needed, when it&apos;s needed.
           <br />
-          Extend DeerFlow with your own skill files, or use our built-in
-          library.
+          AI Tool Research uses them to guide tool evaluation, landing risk,
+          pilot planning, and structured report output.
         </div>
       }
     >

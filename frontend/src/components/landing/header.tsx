@@ -1,5 +1,4 @@
 import { StarFilledIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { NumberTicker } from "@/components/ui/number-ticker";
@@ -15,9 +14,7 @@ export type HeaderProps = {
 };
 
 export async function Header({ className, homeURL, locale }: HeaderProps) {
-  const isExternalHome = !homeURL;
-  const { locale: resolvedLocale, t } = await getI18n(locale);
-  const lang = resolvedLocale.substring(0, 2);
+  await getI18n(locale);
   return (
     <header
       className={cn(
@@ -27,29 +24,15 @@ export async function Header({ className, homeURL, locale }: HeaderProps) {
     >
       <div className="flex items-center gap-6">
         <a
-          href={homeURL ?? "https://github.com/bytedance/deer-flow"}
-          target={isExternalHome ? "_blank" : "_self"}
-          rel={isExternalHome ? "noopener noreferrer" : undefined}
+          href={homeURL ?? "/"}
+          target="_self"
         >
           <h1 className="font-serif text-xl">
             AI Tool Research｜AI工具深度测评系统
           </h1>
         </a>
       </div>
-      <nav className="mr-8 ml-auto flex items-center gap-8 text-sm font-medium">
-        <Link
-          href={`/${lang}/docs`}
-          className="text-secondary-foreground hover:text-foreground transition-colors"
-        >
-          {t.home.docs}
-        </Link>
-        <Link
-          href="/blog/posts"
-          className="text-secondary-foreground hover:text-foreground transition-colors"
-        >
-          {t.home.blog}
-        </Link>
-      </nav>
+      <div className="ml-auto" />
       <div className="relative">
         <div
           className="pointer-events-none absolute inset-0 z-0 h-full w-full rounded-full opacity-30 blur-2xl"
@@ -70,7 +53,7 @@ export async function Header({ className, homeURL, locale }: HeaderProps) {
             rel="noopener noreferrer"
           >
             <GitHubLogoIcon className="size-4" />
-            Star on GitHub
+            查看 DeerFlow 原项目源码
             {env.NEXT_PUBLIC_STATIC_WEBSITE_ONLY === "true" &&
               env.GITHUB_OAUTH_TOKEN && <StarCounter />}
           </a>

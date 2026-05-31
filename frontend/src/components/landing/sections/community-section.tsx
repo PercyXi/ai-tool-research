@@ -13,10 +13,10 @@ export function CommunitySection() {
     <Section
       title={
         <AuroraText colors={["#60A5FA", "#A5FA60", "#A560FA"]}>
-          Join the Community
+          Open Source Foundation
         </AuroraText>
       }
-      subtitle="Contribute brilliant ideas to shape the future of DeerFlow. Collaborate, innovate, and make impacts."
+      subtitle="AI Tool Research is a scenario-focused demo built on the original DeerFlow open-source project."
     >
       <div className="flex justify-center">
         <Button className="text-xl" size="lg" asChild>
@@ -26,7 +26,7 @@ export function CommunitySection() {
             rel="noopener noreferrer"
           >
             <GitHubLogoIcon />
-            Contribute Now
+            查看 DeerFlow 原项目源码
           </Link>
         </Button>
       </div>

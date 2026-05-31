@@ -15,9 +15,8 @@ export function SandboxSection({ className }: { className?: string }) {
       title="Agent Runtime Environment"
       subtitle={
         <p>
-          We give DeerFlow a &quot;computer&quot;, which can execute commands,
-          manage files, and run long tasks — all in a secure Docker-based
-          sandbox
+          AI Tool Research 保留原 DeerFlow 的 Agent 执行和沙箱能力，用于支撑工具研究、
+          资料整理和结构化报告生成。
         </p>
       }
     >

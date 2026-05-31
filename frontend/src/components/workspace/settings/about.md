@@ -1,55 +1,29 @@
-# 🦌 [About DeerFlow 2.0](https://github.com/bytedance/deer-flow)
+# 关于 AI Tool Research
 
-> **From Open Source, Back to Open Source**
+AI Tool Research｜AI工具深度测评系统是基于 DeerFlow 的场景化改造版本。
 
-**DeerFlow** (**D**eep **E**xploration and **E**fficient **R**esearch **Flow**) is a community-driven SuperAgent harness that researches, codes, and creates.
-With the help of sandboxes, memories, tools and skills, it handles
-different levels of tasks that could take minutes to hours.
+当前版本聚焦 AI 工具测评、工具选型、落地风险和试点方案生成，面向 AI 运营、AI 工具运营、工作流/Agent 产品运营等场景，用于快速形成结构化研究结论。
 
----
+## 改造范围
 
-## 🌟 GitHub Repository
+- Workspace 入口和品牌文案
+- AI 工具测评启动器
+- 推荐问题与历史测评展示
+- AI 工具测评报告结构
+- Fast Evaluation Mode
+- 报告复制与 PDF 保存能力
 
-Explore DeerFlow on GitHub: [github.com/bytedance/deer-flow](https://github.com/bytedance/deer-flow)
+## 与 DeerFlow 的关系
 
-## 🌐 Official Website
+DeerFlow 是原开源项目，提供 Agent 执行、研究报告、Markdown 输出、工具调用和沙箱等基础能力。
 
-Visit the official website of DeerFlow: [deerflow.tech](https://deerflow.tech/)
+AI Tool Research 是基于 DeerFlow 的场景化改造 Demo，保留原有技术底座，并将产品体验收敛到 AI 工具测评、工具选型和运营研究工作台。
 
-## 📧 Support
+## 原项目链接
 
-If you have any questions or need help, please contact us at [support@deerflow.tech](mailto:support@deerflow.tech).
+- [查看原项目文档](https://deerflow.tech/)
+- [查看 DeerFlow 原项目源码](https://github.com/bytedance/deer-flow)
 
----
+## 版本边界
 
-## 📜 License
-
-DeerFlow is proudly open source and distributed under the **MIT License**.
-
----
-
-## 🙌 Acknowledgments
-
-We extend our heartfelt gratitude to the open source projects and contributors who have made DeerFlow a reality. We truly stand on the shoulders of giants.
-
-### Core Frameworks
-
-- **[LangChain](https://github.com/langchain-ai/langchain)**: A phenomenal framework that powers our LLM interactions and chains.
-- **[LangGraph](https://github.com/langchain-ai/langgraph)**: Enabling sophisticated multi-agent orchestration.
-- **[Next.js](https://nextjs.org/)**: A cutting-edge framework for building web applications.
-
-### UI Libraries
-
-- **[Shadcn](https://ui.shadcn.com/)**: Minimalistic components that power our UI.
-- **[SToneX](https://github.com/stonexer)**: For his invaluable contribution to token-by-token visual effects.
-
-These outstanding projects form the backbone of DeerFlow and exemplify the transformative power of open source collaboration.
-
-### Special Thanks
-
-Finally, we want to express our heartfelt gratitude to the core authors of DeerFlow 1.0 and 2.0:
-
-- **[Daniel Walnut](https://github.com/hetaoBackend/)**
-- **[Henry Li](https://github.com/magiccube/)**
-
-Without their vision, passion and dedication, `DeerFlow` would not be what it is today.
+当前版本定位为求职作品集 Demo，重点展示 AI 工具测评场景设计、Agent 输出结构调优和产品化改造思路，不作为生产级企业系统使用。

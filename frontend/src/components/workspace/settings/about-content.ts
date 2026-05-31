@@ -1,67 +1,34 @@
 /**
- * About DeerFlow markdown content. Inlined to avoid raw-loader dependency
- * (Turbopack cannot resolve raw-loader for .md imports).
+ * About AI Tool Research markdown content. Inlined to avoid raw-loader dependency
+ * and keep the settings page fully static.
  */
-export const aboutMarkdown = `# 🦌 [About DeerFlow 2.0](https://github.com/bytedance/deer-flow)
+export const aboutMarkdown = `# 关于 AI Tool Research
 
-> **From Open Source, Back to Open Source**
+AI Tool Research｜AI工具深度测评系统是基于 DeerFlow 的场景化改造版本。
 
-DeerFlow (**D**eep **E**xploration and **E**fficient **R**esearch **Flow**) is an open-source **super agent harness** that orchestrates **sub-agents**, **memory**, and **sandboxes** to do almost anything — powered by **extensible skills**.
+当前版本聚焦 AI 工具测评、工具选型、落地风险和试点方案生成，面向 AI 运营、AI 工具运营、工作流/Agent 产品运营等场景，用于快速形成结构化研究结论。
 
----
+## 改造范围
 
-## 🚀 Core Features
+- Workspace 入口和品牌文案
+- AI 工具测评启动器
+- 推荐问题与历史测评展示
+- AI 工具测评报告结构
+- Fast Evaluation Mode
+- 报告复制与 PDF 保存能力
 
-* **Skills & Tools**: With built-in and extensible skills and tools, DeerFlow can do almost anything.
-* **Sub-Agents**: Sub-Agents help the main agent to do the tasks that are too complex to be done by the main agent.
-* **Sandbox & File System**: Safely execute code and manipulate files in the sandbox.
-* **Context Engineering**: Isolated sub-agent context, summarization to keep the context window sharp.
-* **Long-Term Memory**: Keep recording the user's profile, top of mind, and conversation history.
+## 与 DeerFlow 的关系
 
----
+DeerFlow 是原开源项目，提供 Agent 执行、研究报告、Markdown 输出、工具调用和沙箱等基础能力。
 
-## 🌟 GitHub Repository
+AI Tool Research 是基于 DeerFlow 的场景化改造 Demo，保留原有技术底座，并将产品体验收敛到 AI 工具测评、工具选型和运营研究工作台。
 
-![Star History Chart](https://api.star-history.com/svg?repos=bytedance/deer-flow&type=Date)
+## 原项目链接
 
-Explore DeerFlow on GitHub: [github.com/bytedance/deer-flow](https://github.com/bytedance/deer-flow)
+- [查看原项目文档](https://deerflow.tech/)
+- [查看 DeerFlow 原项目源码](https://github.com/bytedance/deer-flow)
 
-## 🌐 Official Website
+## 版本边界
 
-Visit the official website of DeerFlow: [deerflow.tech](https://deerflow.tech/)
-
-## 📧 Support
-
-If you have any questions or need help, please contact us at [support@deerflow.tech](mailto:support@deerflow.tech).
-
----
-
-## 📜 License
-
-DeerFlow is proudly open source and distributed under the **MIT License**.
-
----
-
-## 🙌 Acknowledgments
-
-We extend our heartfelt gratitude to the open source projects and contributors who have made DeerFlow a reality. We truly stand on the shoulders of giants.
-
-### Core Frameworks
-- **[LangChain](https://github.com/langchain-ai/langchain)**: A phenomenal framework that powers our LLM interactions and chains.
-- **[LangGraph](https://github.com/langchain-ai/langgraph)**: Enabling sophisticated multi-agent orchestration.
-- **[Next.js](https://nextjs.org/)**: A cutting-edge framework for building web applications.
-
-### UI Libraries
-- **[Shadcn](https://ui.shadcn.com/)**: Minimalistic components that power our UI.
-- **[SToneX](https://github.com/stonexer)**: For his invaluable contribution to token-by-token visual effects.
-
-These outstanding projects form the backbone of DeerFlow and exemplify the transformative power of open source collaboration.
-
-### Special Thanks
-Finally, we want to express our heartfelt gratitude to the core authors of DeerFlow 1.0 and 2.0:
-
-- **[Daniel Walnut](https://github.com/hetaoBackend/)**
-- **[Henry Li](https://github.com/magiccube/)**
-
-Without their vision, passion and dedication, \`DeerFlow\` would not be what it is today.
+当前版本定位为求职作品集 Demo，重点展示 AI 工具测评场景设计、Agent 输出结构调优和产品化改造思路，不作为生产级企业系统使用。
 `;
