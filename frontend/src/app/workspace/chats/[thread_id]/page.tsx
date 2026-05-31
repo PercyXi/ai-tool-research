@@ -129,7 +129,12 @@ export default function ChatPage() {
   return (
     <ThreadContext.Provider value={{ thread, isMock }}>
       <ChatBox threadId={threadId}>
-        <div className="relative flex size-full min-h-0 justify-between">
+        <div
+          className={cn(
+            "relative flex size-full min-h-0 justify-between",
+            isWelcomeMode && "bg-[#faf9f6]",
+          )}
+        >
           <header
             className={cn(
               "absolute top-0 right-0 left-0 z-30 flex h-12 shrink-0 items-center px-4",
@@ -174,7 +179,7 @@ export default function ChatPage() {
               className={cn(
                 "z-30 flex justify-center px-4",
                 isWelcomeMode
-                  ? "absolute inset-x-0 top-12 bottom-0 overflow-y-auto py-8"
+                  ? "absolute inset-x-0 top-12 bottom-0 overflow-y-auto bg-[#faf9f6] py-8 sm:py-10 lg:py-12"
                   : "right-0 bottom-0 left-0 relative shrink-0 pb-4",
               )}
             >
@@ -182,7 +187,7 @@ export default function ChatPage() {
                 className={cn(
                   "relative w-full",
                   isWelcomeMode
-                    ? "flex min-h-full max-w-(--container-width-sm) flex-col justify-center gap-4"
+                    ? "flex min-h-full max-w-[960px] flex-col justify-center gap-5 sm:gap-6"
                     : "max-w-(--container-width-md)",
                 )}
               >
@@ -210,7 +215,12 @@ export default function ChatPage() {
                 )}
                 {mountedRef.current ? (
                   <InputBox
-                    className="bg-background/5 w-full"
+                    className={cn(
+                      "w-full",
+                      isWelcomeMode
+                        ? "bg-white/95 shadow-[0_12px_36px_rgba(17,24,39,0.08)]"
+                        : "bg-background/5",
+                    )}
                     isWelcomeMode={isWelcomeMode}
                     threadId={threadId}
                     autoFocus={isWelcomeMode}

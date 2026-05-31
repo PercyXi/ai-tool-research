@@ -29,20 +29,30 @@ export function WorkspaceHeader({ className }: { className?: string }) {
       >
         {state === "collapsed" ? (
           <div className="group-has-data-[collapsible=icon]/sidebar-wrapper:-translate-y flex w-full cursor-pointer items-center justify-center">
-            <div className="text-primary block pt-1 font-serif group-hover/workspace-header:hidden">
-              DF
+            <div className="text-primary block pt-1 text-sm font-semibold group-hover/workspace-header:hidden">
+              AI
             </div>
             <SidebarTrigger className="hidden pl-2 group-hover/workspace-header:block" />
           </div>
         ) : (
           <div className="flex items-center justify-between gap-2">
             {env.NEXT_PUBLIC_STATIC_WEBSITE_ONLY === "true" ? (
-              <Link href="/" className="text-primary ml-2 font-serif">
-                AI Tool Research｜AI工具深度测评系统
+              <Link href="/" className="ml-2 flex min-w-0 flex-col">
+                <span className="text-primary truncate text-sm font-semibold">
+                  AI Tool Research
+                </span>
+                <span className="text-muted-foreground truncate text-xs">
+                  AI工具深度测评系统
+                </span>
               </Link>
             ) : (
-              <div className="text-primary ml-2 cursor-default font-serif">
-                AI Tool Research｜AI工具深度测评系统
+              <div className="ml-2 flex min-w-0 cursor-default flex-col">
+                <span className="text-primary truncate text-sm font-semibold">
+                  AI Tool Research
+                </span>
+                <span className="text-muted-foreground truncate text-xs">
+                  AI工具深度测评系统
+                </span>
               </div>
             )}
             <SidebarTrigger />
