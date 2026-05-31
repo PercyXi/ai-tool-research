@@ -27,7 +27,22 @@ class TitleConfig(BaseModel):
         description="Model name to use for title generation (None = use default model)",
     )
     prompt_template: str = Field(
-        default=("Generate a concise title (max {max_words} words) for this conversation.\nUser: {user_msg}\nAssistant: {assistant_msg}\n\nReturn ONLY the title, no quotes, no explanation."),
+        default=(
+            "Generate a concise title (max {max_words} words, max {max_chars} characters) for this conversation.\n"
+            "User: {user_msg}\n"
+            "Assistant: {assistant_msg}\n\n"
+            "If the conversation is about AI tool evaluation, tool comparison, pilot planning, AI operations tool selection, workflow automation, Agent platforms, knowledge bases, or tools such as Dify, Coze, FastGPT, Codex, Claude Code, n8n, or Make, make the title look like an evaluation record.\n"
+            "Prefer these patterns when applicable:\n"
+            "- Single-tool quick evaluation: Tool｜快速测评｜ScenarioKeyword\n"
+            "- Tool comparison: ToolA vs ToolB｜工具对比\n"
+            "- Knowledge-base tool comparison: ToolA vs ToolB｜知识库工具对比\n"
+            "- Pilot plan: Tool｜试点方案｜TeamOrScenario\n"
+            "- Coding or automation tool: Tool｜内容自动化测评 or Tool｜AI 编程工具测评\n"
+            "Prioritize tool name, evaluation type, and scenario keyword. If the tool name is unclear, use ScenarioKeyword｜EvaluationType, for example AI工具选型｜试点方案.\n"
+            "Do not force the AI-tool title format onto normal conversations; for normal conversations, generate a natural short title.\n"
+            "Keep it short for a sidebar. Avoid long titles like 关于……的分析报告. Do not use punctuation at the end. Do not output Markdown, quotes, or explanation.\n\n"
+            "Return ONLY the title."
+        ),
         description="Prompt template for title generation",
     )
 
