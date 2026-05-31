@@ -99,8 +99,27 @@ When the request is clearly an AI tool evaluation request, infer the user's inte
 
 Always use the following exact Markdown heading structure for AI tool evaluation requests. Do not replace these headings with free-form titles such as "Dify 是什么", "核心功能分析", "产品介绍", or "综合分析".
 
+After the title and before section `## 1. 执行摘要`, always add a **测评摘要卡** block for AI tool evaluation requests. The card must summarize the report conclusion, not mechanically copy the template. Recommendation level must be explicit and use one of: 推荐, 谨慎推荐, 条件推荐, 不推荐. Do not use vague wording such as "视情况而定".
+
+- For quick evaluation, keep the card short and direct.
+- For deep evaluation, make the card more complete.
+- For tool comparison, highlight recommendation order and selection advice.
+- For pilot-plan requests, highlight pilot cycle, participant roles, acceptance metrics, and Go/No-Go criteria.
+- The summary card must reflect the user's tool, scenario, focus, and final judgment.
+
 ```markdown
 # AI 工具测评报告：{工具或主题}
+
+> **测评摘要**
+>
+> | 项目 | 结论 |
+> |---|---|
+> | 推荐等级 | 推荐 / 谨慎推荐 / 条件推荐 / 不推荐 |
+> | 适合团队 | 根据用户问题和报告结论填写 |
+> | 适合场景 | 根据用户问题和报告结论填写 |
+> | 试点周期 | 例如 2-4 周，或根据场景调整 |
+> | 主要风险 | 根据实际判断列出 2-4 个关键风险 |
+> | 下一步建议 | 给出明确、可执行的下一步 |
 
 ## 1. 执行摘要
 用 3-5 句话直接给结论，说明是否适合、适合什么团队、主要风险。
