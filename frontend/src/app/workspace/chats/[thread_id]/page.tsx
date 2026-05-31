@@ -172,19 +172,21 @@ export default function ChatPage() {
             </div>
             <div
               className={cn(
-                "right-0 bottom-0 left-0 z-30 flex justify-center px-4",
-                isWelcomeMode ? "absolute" : "relative shrink-0 pb-4",
+                "z-30 flex justify-center px-4",
+                isWelcomeMode
+                  ? "absolute inset-x-0 top-12 bottom-0 overflow-y-auto py-8"
+                  : "right-0 bottom-0 left-0 relative shrink-0 pb-4",
               )}
             >
               <div
                 className={cn(
                   "relative w-full",
-                  isWelcomeMode && "-translate-y-[calc(50vh-96px)]",
                   isWelcomeMode
-                    ? "max-w-(--container-width-sm)"
+                    ? "flex min-h-full max-w-(--container-width-sm) flex-col justify-center gap-4"
                     : "max-w-(--container-width-md)",
                 )}
               >
+                {isWelcomeMode && <Welcome mode={settings.context.mode} />}
                 {hasTodos && (
                   <div
                     className={cn(
@@ -208,10 +210,7 @@ export default function ChatPage() {
                 )}
                 {mountedRef.current ? (
                   <InputBox
-                    className={cn(
-                      "bg-background/5 w-full",
-                      isWelcomeMode && "-translate-y-4",
-                    )}
+                    className="bg-background/5 w-full"
                     isWelcomeMode={isWelcomeMode}
                     threadId={threadId}
                     autoFocus={isWelcomeMode}
@@ -223,9 +222,7 @@ export default function ChatPage() {
                           : "ready"
                     }
                     context={settings.context}
-                    extraHeader={
-                      isWelcomeMode && <Welcome mode={settings.context.mode} />
-                    }
+                    extraHeader={undefined}
                     disabled={
                       isMock ||
                       env.NEXT_PUBLIC_STATIC_WEBSITE_ONLY === "true" ||
@@ -240,10 +237,7 @@ export default function ChatPage() {
                 ) : (
                   <div
                     aria-hidden="true"
-                    className={cn(
-                      "bg-background/5 h-32 w-full rounded-2xl",
-                      isWelcomeMode && "-translate-y-4",
-                    )}
+                    className="bg-background/5 h-32 w-full rounded-2xl"
                   />
                 )}
                 {env.NEXT_PUBLIC_STATIC_WEBSITE_ONLY === "true" && (
