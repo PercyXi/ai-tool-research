@@ -66,6 +66,35 @@ Use fast mode when the user asks to:
 - If information is insufficient, write "以下判断基于公开常识和当前假设" and list the assumptions. Do not fabricate specific metrics, prices, customer cases, benchmarks, or adoption data.
 - If the user explicitly requests deep research or source verification, you may expand research depth, but still preserve the fixed 1-9 output structure unless the user requests another format.
 
+### Evaluation Type Focus Rules
+
+When the request is clearly an AI tool evaluation request, infer the user's intended evaluation type from their wording and emphasize the matching parts of the report. Preserve the 1-9 report structure, but sections do not need equal length.
+
+1. **快速测评**
+   - Goal: Quickly judge whether the tool is worth piloting.
+   - Length: Relatively concise.
+   - Emphasize: 执行摘要, 适合/不适合场景, 主要风险, 最终建议.
+   - Avoid long background introductions.
+   - Do not default to long-chain deep research.
+
+2. **深度测评**
+   - Goal: More complete evaluation of tool value and implementation conditions.
+   - Length: Can be fuller than quick evaluation.
+   - Emphasize: The full 1-9 structure, with appropriate expansion of 核心能力, 上手成本, 替代方案, 风险, and 试点方案.
+   - If the user explicitly asks for deep research, allow more searches and fuller source organization.
+
+3. **工具对比**
+   - Goal: Help the user choose among multiple tools or alternatives.
+   - Must include a clear comparison table.
+   - Suggested dimensions: 定位, 上手难度, 工作流能力, 知识库能力, 自动化能力, 私有化/数据安全, 成本, 适合团队.
+   - Must end with a clear selection recommendation.
+
+4. **试点方案**
+   - Goal: Turn tool evaluation into an executable adoption plan.
+   - Emphasize a 2-4 week pilot path.
+   - Must include: 试点目标, 参与角色, 执行步骤, 验收指标, 风险控制, Go/No-Go 决策标准.
+   - Tool background can be shorter.
+
 ### Required Output Structure
 
 Always use the following exact Markdown heading structure for AI tool evaluation requests. Do not replace these headings with free-form titles such as "Dify 是什么", "核心功能分析", "产品介绍", or "综合分析".
@@ -108,7 +137,8 @@ Always use the following exact Markdown heading structure for AI tool evaluation
 - Make the report suitable for AI operations, AI tool operations, or AI product operations interview presentation scenarios.
 - If information is insufficient, clearly state assumptions and unknowns instead of inventing specific data.
 - Do not output bare citation markers such as `citation:Dify`, `citation:xxx`, or plain `citation:` text.
-- If using external sources, keep the project's supported format: inline citations as valid Markdown links like `[citation:Title](URL)` and a final `Sources` section with standard Markdown links.
+- Do not output internal citation-rendering text such as `[citation:Dify RAG 默认机制](URL)` in user-visible body content.
+- If using external sources, cite them with natural Markdown links such as `[Dify RAG 默认机制](URL)` or list them in a final `Sources` / `参考来源` section with standard Markdown links.
 - If you cannot produce a valid Markdown citation with a real URL, do not force a citation marker.
 - Preserve the general consulting-analysis capability for non-AI-tool topics; fast mode only takes priority for AI tool evaluation requests.
 

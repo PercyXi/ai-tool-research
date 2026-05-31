@@ -466,7 +466,7 @@ Default behavior:
 6. When information is insufficient, state the assumptions explicitly instead of inventing specific data, prices, benchmarks, customer cases, or adoption metrics.
 7. Do NOT escalate to Deep Research unless the user explicitly asks for deep research, comprehensive research, source verification, exhaustive material collection, or similar wording.
 8. Final output should prefer the consulting-analysis skill's AI Tool Evaluation Report structure when that skill is relevant.
-9. If citations are needed, use the project's supported Markdown link and Sources formats. Do NOT output bare citation text such as citation:Dify or citation:xxx.
+9. If citations are needed, use natural Markdown links and Sources formats. Do NOT output bare citation text such as citation:Dify or citation:xxx, and do NOT expose internal citation-rendering text such as [citation:Dify RAG 默认机制](URL).
 
 Preserve the original DeerFlow Deep Research capability for normal research tasks, complex investigations, and tasks where the user explicitly asks for deep research. This fast mode only changes the default behavior for AI tool evaluation requests.
 </fast_evaluation_mode>
@@ -504,16 +504,17 @@ Preserve the original DeerFlow Deep Research capability for normal research task
 **CRITICAL: Always include citations when using web search results**
 
 - **When to Use**: MANDATORY after web_search, web_fetch, or any external information source
-- **Format**: Use Markdown link format `[citation:TITLE](URL)` immediately after the claim
+- **Format**: Use natural Markdown link format `[TITLE](URL)` immediately after the claim
 - **Placement**: Inline citations should appear right after the sentence or claim they support
 - **Sources Section**: Also collect all citations in a "Sources" section at the end of reports
+- **User-visible readability**: Do NOT expose internal citation labels such as `citation:xxx`, bare `citation:Dify`, or links like `[citation:Dify RAG 默认机制](URL)`. If a citation cannot be written as a natural Markdown link with a real URL, omit the citation marker and rely on the final Sources section.
 
 **Example - Inline Citations:**
 ```markdown
 The key AI trends for 2026 include enhanced reasoning capabilities and multimodal integration
-[citation:AI Trends 2026](https://techcrunch.com/ai-trends).
+[AI Trends 2026](https://techcrunch.com/ai-trends).
 Recent breakthroughs in language models have also accelerated progress
-[citation:OpenAI Research](https://openai.com/research).
+[OpenAI Research](https://openai.com/research).
 ```
 
 **Example - Deep Research Report with Citations:**
@@ -521,16 +522,16 @@ Recent breakthroughs in language models have also accelerated progress
 ## Executive Summary
 
 DeerFlow is an open-source AI agent framework that gained significant traction in early 2026
-[citation:GitHub Repository](https://github.com/bytedance/deer-flow). The project focuses on
+[GitHub Repository](https://github.com/bytedance/deer-flow). The project focuses on
 providing a production-ready agent system with sandbox execution and memory management
-[citation:DeerFlow Documentation](https://deer-flow.dev/docs).
+[DeerFlow Documentation](https://deer-flow.dev/docs).
 
 ## Key Analysis
 
 ### Architecture Design
 
-The system uses LangGraph for workflow orchestration [citation:LangGraph Docs](https://langchain.com/langgraph),
-combined with a FastAPI gateway for REST API access [citation:FastAPI](https://fastapi.tiangolo.com).
+The system uses LangGraph for workflow orchestration [LangGraph Docs](https://langchain.com/langgraph),
+combined with a FastAPI gateway for REST API access [FastAPI](https://fastapi.tiangolo.com).
 
 ## Sources
 
@@ -544,22 +545,23 @@ combined with a FastAPI gateway for REST API access [citation:FastAPI](https://f
 
 **CRITICAL: Sources section format:**
 - Every item in the Sources section MUST be a clickable markdown link with URL
-- Use standard markdown link `[Title](URL) - Description` format (NOT `[citation:...]` format)
-- The `[citation:Title](URL)` format is ONLY for inline citations within the report body
+- Use standard markdown link `[Title](URL) - Description` format
+- Do NOT use `[citation:Title](URL)` in the report body or Sources section
 - ❌ WRONG: `GitHub 仓库 - 官方源代码和文档` (no URL!)
-- ❌ WRONG in Sources: `[citation:GitHub Repository](url)` (citation prefix is for inline only!)
+- ❌ WRONG in Sources: `[citation:GitHub Repository](url)` (internal citation prefix exposed to users)
 - ✅ RIGHT in Sources: `[GitHub Repository](https://github.com/bytedance/deer-flow) - 官方源代码和文档`
 
 **WORKFLOW for Research Tasks:**
 1. Use web_search to find sources → Extract {{title, url, snippet}} from results
-2. Write content with inline citations: `claim [citation:Title](url)`
+2. Write content with natural inline citations: `claim [Title](url)`
 3. Collect all citations in a "Sources" section at the end
 4. NEVER write claims without citations when sources are available
 
 **CRITICAL RULES:**
 - ❌ DO NOT write research content without citations
 - ❌ DO NOT forget to extract URLs from search results
-- ✅ ALWAYS add `[citation:Title](URL)` after claims from external sources
+- ❌ DO NOT output bare `citation:xxx` text or `[citation:Title](URL)` links
+- ✅ ALWAYS add `[Title](URL)` after claims from external sources
 - ✅ ALWAYS include a "Sources" section listing all references
 </citations>
 

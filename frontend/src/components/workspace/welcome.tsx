@@ -62,20 +62,28 @@ export function Welcome({
     const resolvedToolName = toolName.trim();
     const resolvedScenario = scenario.trim();
     const resolvedFocus = formatFocusText(focus);
-    const target =
-      resolvedScenario && resolvedToolName
-        ? `${resolvedToolName} 是否适合${resolvedScenario}`
-        : resolvedToolName || resolvedScenario || "这个 AI 工具";
+    const toolSubject = resolvedToolName || "这个 AI 工具";
+    const scenarioSubject = resolvedScenario || "当前业务场景";
     const focusText = resolvedFocus ? `，重点看${resolvedFocus}` : "";
-    const action =
+    const focusAnalysis = resolvedFocus ? `，重点分析${resolvedFocus}` : "";
+    const focusCompare = resolvedFocus ? `，重点比较${resolvedFocus}` : "";
+    const focusAttention = resolvedFocus
+      ? `，重点关注${resolvedFocus}`
+      : "";
+    const suitabilityTarget =
+      resolvedToolName && resolvedScenario
+        ? `${resolvedToolName} 是否适合${resolvedScenario}`
+        : resolvedToolName
+          ? `${resolvedToolName} 的适用性`
+          : `适合 ${scenarioSubject} 的 AI 工具`;
+    const prompt =
       evaluationType === "深度测评"
-        ? "深入评估"
+        ? `请对 ${toolSubject} 在 ${scenarioSubject} 中的适用性做一份较完整的深度测评${focusAnalysis}，并输出结构化 AI 工具测评报告。`
         : evaluationType === "工具对比"
-          ? "对比评估"
+          ? `请围绕 ${scenarioSubject}，对比 ${toolSubject} 与同类替代方案${focusCompare}，并给出选型建议。`
           : evaluationType === "试点方案"
-            ? "评估并设计试点方案"
-            : "快速评估";
-    const prompt = `帮我${action} ${target}${focusText}。`;
+            ? `请为 ${toolSubject} 在 ${scenarioSubject} 中设计一个 2-4 周试点方案${focusAttention}，包括试点目标、参与角色、执行步骤、验收指标和风险控制。`
+            : `帮我快速评估 ${suitabilityTarget}${focusText}，请给出清晰结论、主要风险和试点建议。`;
 
     window.dispatchEvent(
       new CustomEvent(TOOL_EVALUATION_PROMPT_EVENT, {
