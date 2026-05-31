@@ -59,6 +59,27 @@ import { pathOfThread, titleOfThread } from "@/core/threads/utils";
 import { env } from "@/env";
 import { isIMEComposing } from "@/lib/ime";
 
+const EVALUATION_TITLE_TAGS = [
+  "快速测评",
+  "深度测评",
+  "工具对比",
+  "试点方案",
+  "工具测评",
+  "选型",
+];
+
+function displayTitleOfThread(thread: AgentThread) {
+  const title = thread.values?.title?.trim();
+  if (!title || title.toLowerCase() === "untitled") {
+    return "未命名测评";
+  }
+  return title;
+}
+
+function evaluationTagOfTitle(title: string) {
+  return EVALUATION_TITLE_TAGS.find((tag) => title.includes(tag));
+}
+
 export function RecentChatList() {
   const { t } = useI18n();
   const router = useRouter();
@@ -182,6 +203,8 @@ export function RecentChatList() {
             <div className="flex w-full flex-col gap-1">
               {threads.map((thread) => {
                 const isActive = pathOfThread(thread) === pathname;
+                const displayTitle = displayTitleOfThread(thread);
+                const evaluationTag = evaluationTagOfTitle(displayTitle);
                 return (
                   <SidebarMenuItem
                     key={thread.thread_id}
@@ -190,10 +213,17 @@ export function RecentChatList() {
                     <SidebarMenuButton isActive={isActive} asChild>
                       <div>
                         <Link
-                          className="text-muted-foreground block w-full whitespace-nowrap group-hover/side-menu-item:overflow-hidden"
+                          className="text-muted-foreground flex w-full min-w-0 flex-col gap-1 py-1 pr-7 group-hover/side-menu-item:overflow-hidden"
                           href={pathOfThread(thread)}
                         >
-                          {titleOfThread(thread)}
+                          <span className="block max-w-full truncate text-sm leading-5">
+                            {displayTitle}
+                          </span>
+                          {evaluationTag && (
+                            <span className="w-fit rounded-md bg-amber-50 px-1.5 py-0.5 text-[10px] leading-none text-amber-700">
+                              {evaluationTag}
+                            </span>
+                          )}
                         </Link>
                         {env.NEXT_PUBLIC_STATIC_WEBSITE_ONLY !== "true" && (
                           <DropdownMenu>
