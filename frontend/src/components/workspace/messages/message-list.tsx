@@ -1,13 +1,21 @@
 import type { Message } from "@langchain/langgraph-sdk";
 import type { BaseStream } from "@langchain/langgraph-sdk/react";
-import { ChevronUpIcon, Loader2Icon } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import {
+  CheckIcon,
+  ChevronUpIcon,
+  CopyIcon,
+  Loader2Icon,
+  PrinterIcon,
+} from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { toast } from "sonner";
 
 import {
   Conversation,
   ConversationContent,
 } from "@/components/ai-elements/conversation";
 import { Button } from "@/components/ui/button";
+import { writeTextToClipboard } from "@/core/clipboard";
 import { useI18n } from "@/core/i18n/hooks";
 import {
   buildTokenDebugSteps,
@@ -34,7 +42,6 @@ import type { AgentThreadState } from "@/core/threads";
 import { cn } from "@/lib/utils";
 
 import { ArtifactFileList } from "../artifacts/artifact-file-list";
-import { CopyButton } from "../copy-button";
 import { StreamingIndicator } from "../streaming-indicator";
 
 import { MarkdownContent } from "./markdown-content";
@@ -50,6 +57,116 @@ import { SubtaskCard } from "./subtask-card";
 export const MESSAGE_LIST_DEFAULT_PADDING_BOTTOM = 24;
 
 const LOAD_MORE_HISTORY_THROTTLE_MS = 1200;
+
+function escapeHtml(content: string) {
+  return content
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function ReportCopyButton({ clipboardData }: { clipboardData: string }) {
+  const { t } = useI18n();
+  const [copied, setCopied] = useState(false);
+  const handleCopy = useCallback(() => {
+    void (async () => {
+      const didCopy = await writeTextToClipboard(clipboardData);
+      if (!didCopy) {
+        toast.error(t.clipboard.failedToCopyToClipboard);
+        return;
+      }
+
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    })().catch(() => {
+      toast.error(t.clipboard.failedToCopyToClipboard);
+    });
+  }, [clipboardData, t.clipboard.failedToCopyToClipboard]);
+
+  return (
+    <Button
+      type="button"
+      variant="ghost"
+      size="sm"
+      className="text-muted-foreground hover:text-foreground h-7 rounded-full px-2 text-xs"
+      onClick={handleCopy}
+    >
+      {copied ? (
+        <CheckIcon className="mr-1 size-3 text-green-500" />
+      ) : (
+        <CopyIcon className="mr-1 size-3" />
+      )}
+      复制报告
+    </Button>
+  );
+}
+
+function ReportPrintButton({ reportContent }: { reportContent: string }) {
+  const handlePrint = useCallback(() => {
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) {
+      toast.error("无法打开打印窗口，请检查浏览器弹窗设置。");
+      return;
+    }
+
+    const escapedReport = escapeHtml(reportContent);
+    printWindow.document.open();
+    printWindow.document.write(`<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>AI Tool Research Report</title>
+    <style>
+      @page {
+        margin: 18mm;
+      }
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #111827;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.7;
+      }
+      .report {
+        max-width: 820px;
+        margin: 40px auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: 14px;
+      }
+      @media print {
+        .report {
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="report">${escapedReport}</main>
+  </body>
+</html>`);
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => {
+      printWindow.print();
+    }, 100);
+  }, [reportContent]);
+
+  return (
+    <Button
+      type="button"
+      variant="ghost"
+      size="sm"
+      className="text-muted-foreground hover:text-foreground h-7 rounded-full px-2 text-xs"
+      onClick={handlePrint}
+    >
+      <PrinterIcon className="mr-1 size-3" />
+      保存 PDF
+    </Button>
+  );
+}
 
 function LoadMoreHistoryIndicator({
   isLoading,
@@ -196,7 +313,7 @@ export function MessageList({
     [messages, thread.getMessagesMetadata, thread.isLoading],
   );
 
-  const renderAssistantCopyButton = useCallback(
+  const renderAssistantActions = useCallback(
     (messages: Message[], isStreaming: boolean) => {
       const clipboardData = getAssistantTurnCopyData(messages, { isStreaming });
 
@@ -205,8 +322,9 @@ export function MessageList({
       }
 
       return (
-        <div className="mt-2 flex justify-start opacity-0 transition-opacity delay-200 duration-300 group-hover/assistant-turn:opacity-100">
-          <CopyButton clipboardData={clipboardData} />
+        <div className="mt-2 flex justify-start gap-1 opacity-0 transition-opacity delay-200 duration-300 group-hover/assistant-turn:opacity-100">
+          <ReportCopyButton clipboardData={clipboardData} />
+          <ReportPrintButton reportContent={clipboardData} />
         </div>
       );
     },
@@ -301,7 +419,7 @@ export function MessageList({
                   turnUsageMessages,
                 })}
                 {group.type === "assistant" &&
-                  renderAssistantCopyButton(
+                  renderAssistantActions(
                     group.messages,
                     isAssistantMessageGroupStreaming(
                       group.messages,
