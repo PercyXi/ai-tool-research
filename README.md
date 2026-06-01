@@ -95,7 +95,6 @@ pnpm exec next dev --webpack
 http://localhost:3000
 ```
 
-注意：不要把真实 `.env`、API Key 或私有模型配置上传到 GitHub。
 
 ## 项目说明
 
@@ -113,6 +112,4 @@ http://localhost:3000
 - 结构化报告设计能力
 - 低风险迭代和版本管理能力
 
-## 截图
 
-后续补充截图。
