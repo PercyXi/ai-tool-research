@@ -103,7 +103,13 @@ function ReportCopyButton({ clipboardData }: { clipboardData: string }) {
   );
 }
 
-function ReportPrintButton({ reportContent }: { reportContent: string }) {
+function ReportPrintButton({
+  reportContent,
+  reportGroupIndex,
+}: {
+  reportContent: string;
+  reportGroupIndex: number;
+}) {
   const handlePrint = useCallback(() => {
     const printWindow = window.open("", "_blank");
     if (!printWindow) {
@@ -111,7 +117,13 @@ function ReportPrintButton({ reportContent }: { reportContent: string }) {
       return;
     }
 
-    const escapedReport = escapeHtml(reportContent);
+    const reportElement = document.querySelector<HTMLElement>(
+      `[data-report-print-content="${reportGroupIndex}"]`,
+    );
+    const renderedReportHtml = reportElement?.innerHTML.trim();
+    const hasRenderedHtml = Boolean(renderedReportHtml);
+    const fallbackReport = escapeHtml(reportContent);
+
     printWindow.document.open();
     printWindow.document.write(`<!doctype html>
 <html>
@@ -132,9 +144,86 @@ function ReportPrintButton({ reportContent }: { reportContent: string }) {
       .report {
         max-width: 820px;
         margin: 40px auto;
-        white-space: pre-wrap;
         word-break: break-word;
         font-size: 14px;
+      }
+      .report-fallback {
+        white-space: pre-wrap;
+      }
+      h1, h2, h3 {
+        color: #111827;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+      h1 {
+        margin: 0 0 24px;
+        font-size: 28px;
+      }
+      h2 {
+        margin: 32px 0 14px;
+        font-size: 21px;
+      }
+      h3 {
+        margin: 24px 0 10px;
+        font-size: 17px;
+      }
+      p {
+        margin: 10px 0;
+      }
+      table {
+        width: 100%;
+        margin: 16px 0;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      th, td {
+        border: 1px solid #d1d5db;
+        padding: 8px 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        background: #f3f4f6;
+        font-weight: 650;
+      }
+      ul, ol {
+        margin: 10px 0 10px 22px;
+        padding: 0;
+      }
+      li {
+        margin: 4px 0;
+      }
+      blockquote {
+        margin: 16px 0;
+        border-left: 4px solid #c7d2fe;
+        background: #f8fafc;
+        padding: 10px 14px;
+        color: #374151;
+      }
+      code {
+        border-radius: 4px;
+        background: #f3f4f6;
+        padding: 2px 4px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 0.92em;
+      }
+      pre {
+        overflow-x: auto;
+        border-radius: 8px;
+        background: #f3f4f6;
+        padding: 14px;
+      }
+      pre code {
+        background: transparent;
+        padding: 0;
+      }
+      a {
+        color: #2563eb;
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
       }
       @media print {
         .report {
@@ -144,7 +233,7 @@ function ReportPrintButton({ reportContent }: { reportContent: string }) {
     </style>
   </head>
   <body>
-    <main class="report">${escapedReport}</main>
+    <main class="report${hasRenderedHtml ? "" : " report-fallback"}">${hasRenderedHtml ? renderedReportHtml : fallbackReport}</main>
   </body>
 </html>`);
     printWindow.document.close();
@@ -152,7 +241,7 @@ function ReportPrintButton({ reportContent }: { reportContent: string }) {
     setTimeout(() => {
       printWindow.print();
     }, 100);
-  }, [reportContent]);
+  }, [reportContent, reportGroupIndex]);
 
   return (
     <Button
@@ -314,7 +403,7 @@ export function MessageList({
   );
 
   const renderAssistantActions = useCallback(
-    (messages: Message[], isStreaming: boolean) => {
+    (messages: Message[], isStreaming: boolean, groupIndex: number) => {
       const clipboardData = getAssistantTurnCopyData(messages, { isStreaming });
 
       if (!clipboardData) {
@@ -324,7 +413,10 @@ export function MessageList({
       return (
         <div className="mt-2 flex justify-start gap-1 opacity-0 transition-opacity delay-200 duration-300 group-hover/assistant-turn:opacity-100">
           <ReportCopyButton clipboardData={clipboardData} />
-          <ReportPrintButton reportContent={clipboardData} />
+          <ReportPrintButton
+            reportContent={clipboardData}
+            reportGroupIndex={groupIndex}
+          />
         </div>
       );
     },
@@ -403,17 +495,23 @@ export function MessageList({
                   group.type === "assistant" && "group/assistant-turn",
                 )}
               >
-                {group.messages.map((msg) => {
-                  return (
-                    <MessageListItem
-                      key={`${group.id}/${msg.id}`}
-                      message={msg}
-                      isLoading={thread.isLoading}
-                      threadId={threadId}
-                      showCopyButton={group.type !== "assistant"}
-                    />
-                  );
-                })}
+                <div
+                  data-report-print-content={
+                    group.type === "assistant" ? groupIndex : undefined
+                  }
+                >
+                  {group.messages.map((msg) => {
+                    return (
+                      <MessageListItem
+                        key={`${group.id}/${msg.id}`}
+                        message={msg}
+                        isLoading={thread.isLoading}
+                        threadId={threadId}
+                        showCopyButton={group.type !== "assistant"}
+                      />
+                    );
+                  })}
+                </div>
                 {renderTokenUsage({
                   messages: group.messages,
                   turnUsageMessages,
@@ -425,6 +523,7 @@ export function MessageList({
                       group.messages,
                       streamingMessages,
                     ),
+                    groupIndex,
                   )}
               </div>
             );
