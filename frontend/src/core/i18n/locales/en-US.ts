@@ -237,12 +237,12 @@ export const enUS: Translations = {
 
   // Workspace
   workspace: {
-    officialWebsite: "Original DeerFlow documentation",
-    githubTooltip: "Original DeerFlow source code",
+    officialWebsite: "Project information",
+    githubTooltip: "Open-source foundation",
     settingsAndMore: "Settings and more",
-    visitGithub: "Original DeerFlow source code",
-    reportIssue: "Original project issue tracker",
-    contactUs: "Original project support info",
+    visitGithub: "Open-source foundation",
+    reportIssue: "Feedback",
+    contactUs: "Support information",
     about: "About AI Tool Research",
     logout: "Log out",
   },

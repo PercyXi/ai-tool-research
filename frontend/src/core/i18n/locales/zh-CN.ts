@@ -222,12 +222,12 @@ export const zhCN: Translations = {
 
   // Workspace
   workspace: {
-    officialWebsite: "查看原项目文档",
-    githubTooltip: "查看 DeerFlow 原项目源码",
+    officialWebsite: "项目说明",
+    githubTooltip: "开源底座说明",
     settingsAndMore: "设置和更多",
-    visitGithub: "查看 DeerFlow 原项目源码",
-    reportIssue: "原项目问题反馈",
-    contactUs: "原项目支持信息",
+    visitGithub: "开源底座说明",
+    reportIssue: "反馈",
+    contactUs: "支持信息",
     about: "关于 AI Tool Research",
     logout: "退出登录",
   },
