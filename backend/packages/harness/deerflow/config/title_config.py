@@ -28,7 +28,7 @@ class TitleConfig(BaseModel):
     )
     prompt_template: str = Field(
         default=(
-            "Generate a concise title (max {max_words} words, max {max_chars} characters) for this conversation.\n"
+            "Generate a concise title (max {max_words} words; keep it around 24 Chinese characters or 40 English characters when possible) for this conversation.\n"
             "User: {user_msg}\n"
             "Assistant: {assistant_msg}\n\n"
             "If the conversation is about AI tool evaluation, tool comparison, pilot planning, AI operations tool selection, workflow automation, Agent platforms, knowledge bases, or tools such as Dify, Coze, FastGPT, Codex, Claude Code, n8n, or Make, make the title look like an evaluation record.\n"
