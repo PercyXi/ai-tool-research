@@ -1,63 +1,77 @@
 "use client";
 
-import MagicBento, { type BentoCardProps } from "@/components/ui/magic-bento";
+import {
+  BarChart3Icon,
+  Clock3Icon,
+  FileTextIcon,
+  GitCompareIcon,
+  Layers3Icon,
+} from "lucide-react";
+
 import { cn } from "@/lib/utils";
 
-import { Section } from "../section";
-
-const COLOR = "#0a0a0a";
-const features: BentoCardProps[] = [
+const features = [
   {
-    color: COLOR,
-    label: "Evaluation",
-    title: "AI 工具测评",
-    description: "围绕工具价值、适用场景和落地条件形成判断",
+    icon: Layers3Icon,
+    title: "多维测评",
+    description: "从价值、场景、成本、风险等角度全面评估。",
   },
   {
-    color: COLOR,
-    label: "Workflow",
-    title: "工具选型流程",
-    description:
-      "支持快速测评、深度测评、工具对比和试点方案",
+    icon: GitCompareIcon,
+    title: "四种测评模式",
+    description: "快速测评、深度测评、工具对比、试点方案。",
   },
   {
-    color: COLOR,
-    label: "Report",
+    icon: FileTextIcon,
     title: "结构化报告",
-    description:
-      "输出包含摘要卡、风险判断、替代方案和最终建议的 Markdown 报告",
-  },
-
-  {
-    color: COLOR,
-    label: "Risk",
-    title: "落地风险识别",
-    description: "关注成本、权限安全、维护复杂度和团队采用风险",
+    description: "生成专业评估报告，支持复制与 PDF 导出。",
   },
   {
-    color: COLOR,
-    label: "Pilot",
-    title: "2-4 周试点方案",
-    description: "把测评结论转化为可执行的试点目标和验收指标",
+    icon: BarChart3Icon,
+    title: "试点建议",
+    description: "提供 2-4 周试点路径，降低落地风险。",
   },
   {
-    color: COLOR,
-    label: "Reuse",
-    title: "报告复用",
-    description: "支持复制 Markdown 和通过浏览器保存 PDF",
+    icon: Clock3Icon,
+    title: "历史管理",
+    description: "保存测评记录，便于复盘与跟踪。",
   },
 ];
 
 export function WhatsNewSection({ className }: { className?: string }) {
   return (
-    <Section
-      className={cn("", className)}
-      title="AI Tool Research 工作台能力"
-      subtitle="面向 AI 运营团队的工具测评、选型研究、风险判断和试点方案生成。"
+    <section
+      id="features"
+      className={cn("bg-white px-4 py-20", className)}
     >
-      <div className="flex w-full items-center justify-center">
-        <MagicBento data={features} />
+      <div className="mx-auto max-w-6xl">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
+            为 AI 运营团队而设计
+          </h2>
+          <p className="mt-3 text-base text-slate-500 md:text-lg">
+            从工具测评到试点方案，覆盖完整研究流程。
+          </p>
+        </div>
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+          {features.map((feature) => (
+            <div
+              key={feature.title}
+              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <div className="mb-5 flex size-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
+                <feature.icon className="size-6" />
+              </div>
+              <h3 className="text-base font-semibold text-slate-950">
+                {feature.title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }

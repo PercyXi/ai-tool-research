@@ -1,12 +1,11 @@
 "use client";
 
+import { BarChart3Icon } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/core/auth/AuthProvider";
 import { parseAuthError } from "@/core/auth/types";
@@ -48,11 +47,10 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated } = useAuth();
-  const { theme, resolvedTheme } = useTheme();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin] = useState(true);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -127,52 +125,55 @@ export default function LoginPage() {
     }
   };
 
-  const actualTheme = theme === "system" ? resolvedTheme : theme;
-
   return (
-    <div className="bg-background relative flex min-h-screen items-center justify-center overflow-x-hidden overflow-y-auto">
-      <FlickeringGrid
-        className="absolute inset-0 z-0 mask-[url(/images/deer.svg)] mask-size-[100vw] mask-center mask-no-repeat md:mask-size-[72vh]"
-        squareSize={4}
-        gridGap={4}
-        color={actualTheme === "dark" ? "white" : "black"}
-        maxOpacity={0.3}
-        flickerChance={0.25}
-      />
-      <div className="border-border/20 bg-background/5 w-full max-w-md space-y-6 rounded-3xl border p-8 backdrop-blur-sm">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-white px-4 py-10">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(139,92,246,0.18),transparent_28%),radial-gradient(circle_at_75%_28%,rgba(59,130,246,0.14),transparent_24%),linear-gradient(135deg,#ffffff_0%,#f8f7ff_52%,#eef5ff_100%)]" />
+      <div className="absolute inset-0 opacity-40 [background-image:radial-gradient(#8b5cf6_1px,transparent_1px)] [background-size:18px_18px]" />
+      <div className="absolute -bottom-28 left-16 size-80 rounded-full border border-indigo-100" />
+      <div className="absolute -right-24 top-12 size-72 rounded-full border border-blue-100" />
+      <div className="relative z-10 w-full max-w-md space-y-7 rounded-3xl border border-slate-200/80 bg-white/90 p-8 shadow-2xl shadow-indigo-950/10 backdrop-blur-xl">
         <div className="text-center">
-          <h1 className="text-foreground font-serif text-3xl">
-            AI Tool Research｜AI工具深度测评系统
+          <div className="mx-auto mb-5 flex size-12 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-600">
+            <BarChart3Icon className="size-6" />
+          </div>
+          <h1 className="text-3xl font-bold text-slate-950">
+            AI Tool Research
           </h1>
-          <p className="text-muted-foreground mt-2">
-            {isLogin ? "登录你的测评工作台" : "创建账户"}
+          <p className="mt-1 text-sm text-slate-500">
+            AI工具深度测评系统
+          </p>
+          <p className="mt-6 text-lg font-semibold text-slate-950">
+            {isLogin ? "欢迎回来" : "创建账户"}
+          </p>
+          <p className="mt-1 text-sm text-slate-500">
+            {isLogin ? "登录后继续使用你的测评工作台" : "创建你的测评工作台账户"}
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-2">
-          <div className="flex flex-col space-y-1">
-            <label htmlFor="email" className="text-sm font-medium">
-              Email
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="email" className="text-sm font-medium text-slate-700">
+              邮箱
             </label>
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
+              placeholder="请输入邮箱地址"
               required
             />
           </div>
-          <div className="flex flex-col space-y-1">
-            <label htmlFor="password" className="text-sm font-medium">
-              Password
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="password" className="text-sm font-medium text-slate-700">
+              密码
             </label>
             <Input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="•••••••"
+              placeholder="请输入密码"
               required
               minLength={isLogin ? 6 : 8}
             />
@@ -180,7 +181,7 @@ export default function LoginPage() {
 
           {error && <p className="text-sm text-red-500">{error}</p>}
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="h-11 w-full rounded-xl bg-slate-950 text-white hover:bg-slate-800" disabled={loading}>
             {loading
               ? "请稍候..."
               : isLogin
@@ -190,22 +191,13 @@ export default function LoginPage() {
         </form>
 
         <div className="text-center text-sm">
-          <button
-            type="button"
-            onClick={() => {
-              setIsLogin(!isLogin);
-              setError("");
-            }}
-            className="text-blue-500 hover:underline"
-          >
-            {isLogin
-              ? "还没有账户？创建账户"
-              : "已有账户？登录"}
-          </button>
+          <Link href="/setup" className="text-slate-500 hover:text-indigo-600">
+            还没有账号？初始化管理员账号
+          </Link>
         </div>
 
-        <div className="text-muted-foreground text-center text-xs">
-          <Link href="/" className="hover:underline">
+        <div className="text-center text-xs text-slate-400">
+          <Link href="/" className="hover:text-slate-700">
             ← 返回首页
           </Link>
         </div>
